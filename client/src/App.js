@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+import GlobalStyles from "./components/GlobalStyles";
 import HomeFeed from "./components/HomeFeed";
 import Notifications from "./components/Notifications";
 import Bookmarks from "./components/Bookmarks";
@@ -10,6 +11,7 @@ import Profile from "./components/Profile";
 function App() {
   return (
     <Router>
+      <GlobalStyles />
       <Switch>
         <Route path="/" exact>
           <HomeFeed />
