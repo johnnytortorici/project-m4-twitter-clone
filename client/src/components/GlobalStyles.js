@@ -9,4 +9,9 @@ export default createGlobalStyle`
   body {
     font-family: 'Raleway', sans-serif;
   }
+  h1 {
+    font-size: 1.5em;
+    padding-bottom: 10px;
+    border-bottom: 1px solid lightgrey;
+  }
 `;
