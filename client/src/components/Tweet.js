@@ -4,6 +4,7 @@ import styled from "styled-components";
 import moment from "moment";
 
 import TweetActionIcon from "./TweetActionIcon";
+import ActionBar from "./ActionBar";
 
 const Tweet = ({ tweet }) => {
   return (
@@ -17,7 +18,9 @@ const Tweet = ({ tweet }) => {
       <Content>
         <Avatar src={tweet.author.avatarSrc} alt={tweet.author.displayName} />
         <div>
-          <AuthorLink to="/">{tweet.author.displayName}</AuthorLink>
+          <AuthorLink to={`/${tweet.author.handle}`}>
+            {tweet.author.displayName}
+          </AuthorLink>
           <AuthorHandle>
             @{tweet.author.handle} - {moment(tweet.timestamp).format("MMM Do")}
           </AuthorHandle>
@@ -25,6 +28,7 @@ const Tweet = ({ tweet }) => {
           {tweet.media[0] !== undefined && (
             <Media src={tweet.media[0].url} alt="" />
           )}
+          <ActionBar />
         </div>
       </Content>
     </Wrapper>
@@ -37,7 +41,7 @@ const Wrapper = styled.div`
   padding: 10px 0;
 `;
 
-const Retweet = styled.p`
+const Retweet = styled.div`
   display: flex;
   align-items: center;
   color: slategrey;
@@ -79,6 +83,7 @@ const TweetText = styled.p`
 const Media = styled.img`
   width: 100%;
   height: 350px;
+  margin-bottom: 10px;
   object-fit: cover;
   border-radius: 20px;
 `;
