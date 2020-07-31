@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
@@ -6,7 +6,11 @@ import { ReactComponent as Logo } from "../assets/logo.svg";
 import { COLORS } from "../constants";
 import { FiHome, FiUser, FiBell, FiBookmark } from "react-icons/fi";
 
+import { CurrentUserContext } from "./CurrentUserContext";
+
 const Sidebar = () => {
+  const { currentUser } = useContext(CurrentUserContext);
+
   return (
     <Wrapper>
       <NavContainer>
@@ -15,7 +19,7 @@ const Sidebar = () => {
           <FiHome />
           <NavLabel>Home</NavLabel>
         </Nav>
-        <Nav to="/abc">
+        <Nav to={`/${currentUser.handle}`}>
           <FiUser />
           <NavLabel>Profile</NavLabel>
         </Nav>
