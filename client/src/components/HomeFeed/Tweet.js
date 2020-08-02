@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import moment from "moment";
 
-import TweetActionIcon from "./TweetActionIcon";
-import ActionBar from "./ActionBar";
+import TweetActionIcon from "../ActionBar/TweetActionIcon";
+import ActionBar from "../ActionBar";
 
 const Tweet = ({ tweet }) => {
   return (
@@ -24,10 +24,12 @@ const Tweet = ({ tweet }) => {
           <AuthorHandle>
             @{tweet.author.handle} - {moment(tweet.timestamp).format("MMM Do")}
           </AuthorHandle>
-          <TweetText>{tweet.status}</TweetText>
-          {tweet.media[0] !== undefined && (
-            <Media src={tweet.media[0].url} alt="" />
-          )}
+          <TweetLink to={`/tweet/${tweet.id}`}>
+            <TweetText>{tweet.status}</TweetText>
+            {tweet.media[0] !== undefined && (
+              <Media src={tweet.media[0].url} alt="" />
+            )}
+          </TweetLink>
           <ActionBar />
         </div>
       </Content>
@@ -69,11 +71,19 @@ const AuthorLink = styled(Link)`
   font-weight: bold;
   text-decoration: none;
   margin-right: 5px;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const AuthorHandle = styled.span`
   color: slategrey;
   font-size: 0.8em;
+`;
+
+const TweetLink = styled(Link)`
+  text-decoration: none;
+  color: #000;
 `;
 
 const TweetText = styled.p`

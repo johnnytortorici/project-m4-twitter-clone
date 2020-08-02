@@ -25,22 +25,22 @@ const HomeFeed = () => {
   if (status === "loading") return <div>loading</div>;
   else
     return (
-      <Wrapper>
+      <>
         <h1>Home</h1>
         {feed.tweetIds.map((tweetId) => {
           return <Tweet key={tweetId} tweet={feed.tweetsById[tweetId]} />;
         })}
-      </Wrapper>
+      </>
     );
 };
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 600px;
-  padding: 10px;
-  border-left: 1px solid lightgrey;
-  border-right: 1px solid lightgrey;
-`;
+// const Wrapper = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   width: 600px;
+//   padding: 10px;
+//   border-left: 1px solid lightgrey;
+//   border-right: 1px solid lightgrey;
+// `;
 
 export default HomeFeed;
