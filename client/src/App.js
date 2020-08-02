@@ -56,7 +56,7 @@ const Wrapper = styled.div`
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 600px;
+  width: 650px;
   padding: 10px;
   border-left: 1px solid lightgrey;
   border-right: 1px solid lightgrey;

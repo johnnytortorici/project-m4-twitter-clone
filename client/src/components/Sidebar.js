@@ -39,7 +39,7 @@ const Sidebar = () => {
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  width: 400px;
+  width: 300px;
   height: 100vh;
 `;
 

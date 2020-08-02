@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Tweet from "../Tweet";
 
-const HomeFeed = () => {
+const Tweets = ({ handle }) => {
   const [feed, setFeed] = useState(null);
   const [status, setStatus] = useState("loading");
 
   useEffect(() => {
-    fetch("/api/me/home-feed", {
+    fetch(`/api/${handle}/feed`, {
       method: "GET",
       mode: "no-cors",
       headers: {
@@ -19,13 +19,12 @@ const HomeFeed = () => {
         setFeed(data);
         setStatus("idle");
       });
-  }, []);
+  }, [handle]);
 
   if (status === "loading") return <div>loading</div>;
   else
     return (
       <>
-        <h1>Home</h1>
         {feed.tweetIds.map((tweetId) => {
           return <Tweet key={tweetId} tweet={feed.tweetsById[tweetId]} />;
         })}
@@ -33,4 +32,4 @@ const HomeFeed = () => {
     );
 };
 
-export default HomeFeed;
+export default Tweets;

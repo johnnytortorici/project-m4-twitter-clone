@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import moment from "moment";
 
-import TweetActionIcon from "../ActionBar/TweetActionIcon";
-import ActionBar from "../ActionBar";
+import TweetActionIcon from "./ActionBar/TweetActionIcon";
+import ActionBar from "./ActionBar";
 
 const Tweet = ({ tweet }) => {
   return (
