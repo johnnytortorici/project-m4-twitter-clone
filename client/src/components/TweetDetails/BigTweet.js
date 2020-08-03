@@ -33,7 +33,7 @@ const Tweet = ({ tweet }) => {
           {moment(tweet.timestamp).format("HH:MM A - MMM D YYYY")} - Critter web
           app
         </Timestamp>
-        <ActionBar />
+        <ActionBar tweet={tweet} />
       </Content>
     </Wrapper>
   );

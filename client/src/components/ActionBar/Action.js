@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const Action = ({ color, size, children }) => {
+const Action = ({ color, size, isActioned, onClickFunction, children }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [isToggled, setIsToggled] = useState(false);
 
   return (
     <Wrapper
@@ -11,8 +10,10 @@ const Action = ({ color, size, children }) => {
       size={size}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onClick={() => (!isToggled ? setIsToggled(true) : setIsToggled(false))}
-      isToggled={isToggled}
+      onClick={() => {
+        onClickFunction && onClickFunction();
+      }}
+      isActioned={isActioned}
     >
       {children}
       <Circle circleColor={color} isHovered={isHovered} />
@@ -30,10 +31,10 @@ const Wrapper = styled.button`
   align-items: center;
   width: ${(prop) => prop.size}px;
   height: ${(prop) => prop.size}px;
-  color: ${(prop) => (prop.isToggled ? prop.color : null)};
+  color: ${(prop) => (prop.isActioned ? prop.color : null)};
 
   &:hover {
-    color: ${(prop) => (prop.isToggled ? prop.color : null)};
+    color: ${(prop) => (prop.isActioned ? prop.color : null)};
     cursor: pointer;
   }
 `;

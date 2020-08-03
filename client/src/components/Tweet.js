@@ -30,7 +30,7 @@ const Tweet = ({ tweet }) => {
               <Media src={tweet.media[0].url} alt="" />
             )}
           </TweetLink>
-          <ActionBar />
+          <ActionBar tweet={tweet} />
         </div>
       </Content>
     </Wrapper>
