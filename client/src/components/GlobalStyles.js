@@ -11,7 +11,7 @@ export default createGlobalStyle`
   }
   h1 {
     font-size: 1.5em;
-    padding-bottom: 10px;
+    padding: 10px;
     border-bottom: 1px solid lightgrey;
   }
 `;

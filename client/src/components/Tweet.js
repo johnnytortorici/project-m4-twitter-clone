@@ -15,9 +15,9 @@ const Tweet = ({ tweet }) => {
           <RetweetLabel>{tweet.retweetFrom.displayName} Remeowed</RetweetLabel>
         </Retweet>
       )}
-      <Content>
+      <ContentWrapper>
         <Avatar src={tweet.author.avatarSrc} alt={tweet.author.displayName} />
-        <div>
+        <Content>
           <AuthorLink to={`/${tweet.author.handle}`}>
             {tweet.author.displayName}
           </AuthorLink>
@@ -31,8 +31,8 @@ const Tweet = ({ tweet }) => {
             )}
           </TweetLink>
           <ActionBar tweet={tweet} />
-        </div>
-      </Content>
+        </Content>
+      </ContentWrapper>
     </Wrapper>
   );
 };
@@ -40,7 +40,7 @@ const Tweet = ({ tweet }) => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10px 0;
+  padding: 10px;
 `;
 
 const Retweet = styled.div`
@@ -55,7 +55,7 @@ const RetweetLabel = styled.p`
   padding-left: 5px;
 `;
 
-const Content = styled.div`
+const ContentWrapper = styled.div`
   display: flex;
 `;
 
@@ -64,6 +64,10 @@ const Avatar = styled.img`
   height: 40px;
   border-radius: 50%;
   margin-right: 10px;
+`;
+
+const Content = styled.div`
+  width: 100%;
 `;
 
 const AuthorLink = styled(Link)`

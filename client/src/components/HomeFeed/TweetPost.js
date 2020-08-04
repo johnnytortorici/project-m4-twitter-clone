@@ -64,11 +64,11 @@ const TweetPost = ({ handleAfterPublishTweet }) => {
 
 const PostArea = styled.div`
   display: flex;
-  padding-top: 10px;
+  padding: 10px;
 `;
 
 const PostFooter = styled.div`
-  padding: 10px 0;
+  padding: 10px;
   display: flex;
   justify-content: flex-end;
   align-items: center;

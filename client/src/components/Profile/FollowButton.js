@@ -13,7 +13,7 @@ const FollowButton = ({ isFollowing }) => {
 
 const NotFollowing = styled.button`
   color: #000;
-  margin: 5px 0;
+  margin: 5px 10px;
   padding: 10px 20px;
   font-weight: bold;
   font-size: 1.1em;

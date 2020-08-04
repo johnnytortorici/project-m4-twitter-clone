@@ -40,31 +40,31 @@ const Profile = () => {
           <FollowButton isFollowing={profile.isBeingFollowedByYou} />
         </Header>
         <DisplayName>{profile.displayName}</DisplayName>
-        <Handle>
-          @{profile.handle}{" "}
-          {profile.isFollowingYou && <FollowsYou>Follows you</FollowsYou>}
-        </Handle>
-        <Bio>{profile.bio}</Bio>
-        <Info>
-          <Stat>
+        <UserInfo>
+          <Handle>
+            @{profile.handle}{" "}
+            {profile.isFollowingYou && <FollowsYou>Follows you</FollowsYou>}
+          </Handle>
+          <Bio>{profile.bio}</Bio>
+          <Info>
             {profile.location && (
-              <span>
+              <Stat>
                 <FiMapPin /> {profile.location}
-              </span>
+              </Stat>
             )}
-          </Stat>
-          <Stat>
-            <FiCalendar /> Joined {moment(profile.joined).format("MMMM YYYY")}
-          </Stat>
-        </Info>
-        <Info>
-          <Stat>
-            <Num>{profile.numFollowing}</Num> Following
-          </Stat>
-          <Stat>
-            <Num>{profile.numFollowers}</Num> Followers
-          </Stat>
-        </Info>
+            <Stat>
+              <FiCalendar /> Joined {moment(profile.joined).format("MMMM YYYY")}
+            </Stat>
+          </Info>
+          <Info>
+            <Stat>
+              <Num>{profile.numFollowing}</Num> Following
+            </Stat>
+            <Stat>
+              <Num>{profile.numFollowers}</Num> Followers
+            </Stat>
+          </Info>
+        </UserInfo>
         <Tabs>
           <TweetsLink to="#">Tweets</TweetsLink>
           <TabLink to="#">Media</TabLink>
@@ -99,6 +99,10 @@ const Avatar = styled.img`
 
 const DisplayName = styled.h1`
   padding-top: 40px;
+`;
+
+const UserInfo = styled.div`
+  padding: 5px 10px;
 `;
 
 const Handle = styled.p`

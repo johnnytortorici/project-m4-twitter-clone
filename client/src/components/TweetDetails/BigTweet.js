@@ -29,12 +29,12 @@ const Tweet = ({ tweet }) => {
         {tweet.media[0] !== undefined && (
           <Media src={tweet.media[0].url} alt="" />
         )}
-        <Timestamp>
-          {moment(tweet.timestamp).format("HH:MM A - MMM D YYYY")} - Critter web
-          app
-        </Timestamp>
-        <ActionBar tweet={tweet} />
       </Content>
+      <Timestamp>
+        {moment(tweet.timestamp).format("HH:MM A - MMM D YYYY")} - Critter web
+        app
+      </Timestamp>
+      <ActionBar tweet={tweet} />
     </Wrapper>
   );
 };
@@ -49,7 +49,7 @@ const Retweet = styled.div`
   display: flex;
   align-items: center;
   color: slategrey;
-  padding-bottom: 10px;
+  padding: 0 10px 5px;
   font-size: 0.8em;
 `;
 
@@ -58,8 +58,7 @@ const RetweetLabel = styled.p`
 `;
 
 const Content = styled.div`
-  display: flex;
-  flex-direction: column;
+  padding: 10px;
 `;
 
 const Author = styled.div`
@@ -104,7 +103,7 @@ const Media = styled.img`
 
 const Timestamp = styled.p`
   color: slategrey;
-  padding: 10px 0 20px;
+  padding: 10px 10px 20px;
   border-bottom: 1px solid lightgrey;
 `;
 
