@@ -45,7 +45,7 @@ const TweetPost = ({ handleAfterPublishTweet }) => {
           errorMsg.innerText = "Your Meow failed. Please try again.";
         });
     } else {
-      window.alert("Please type in your Meow");
+      errorMsg.innerText = "Please type in your Meow.";
     }
   };
 
