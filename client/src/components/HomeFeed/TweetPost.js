@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 import { CurrentUserContext } from "../CurrentUserContext";
 import { COLORS } from "../../constants";
@@ -18,11 +18,11 @@ const TweetPost = ({ handleAfterPublishTweet }) => {
   };
 
   const handleTweet = () => {
+    let errorMsg = document.getElementById("error-msg");
+    errorMsg.innerText = "";
+
     if (tweet) {
       setStatus("loading");
-      setTweet(null);
-      setCharCount(280);
-      document.getElementById("tweet-area").value = "";
 
       fetch("/api/tweet", {
         method: "POST",
@@ -36,6 +36,13 @@ const TweetPost = ({ handleAfterPublishTweet }) => {
         .then((data) => {
           handleAfterPublishTweet();
           setStatus("idle");
+          setTweet(null);
+          setCharCount(280);
+          document.getElementById("tweet-area").value = "";
+        })
+        .catch((error) => {
+          setStatus("error");
+          errorMsg.innerText = "Your Meow failed. Please try again.";
         });
     } else {
       window.alert("Please type in your Meow");
@@ -53,9 +60,13 @@ const TweetPost = ({ handleAfterPublishTweet }) => {
         ></TweetArea>
       </PostArea>
       <PostFooter>
+        <ErrorMsg id="error-msg"></ErrorMsg>
         <CharCount charCount={charCount}>{charCount}</CharCount>
-        <Meow onClick={handleTweet} disabled={charCount < 0}>
-          {status === "idle" ? "Meow" : <FiLoader />}
+        <Meow
+          onClick={handleTweet}
+          disabled={charCount < 0 || status === "loading"}
+        >
+          {status !== "loading" ? "Meow" : <LoaderIcon />}
         </Meow>
       </PostFooter>
     </>
@@ -122,6 +133,21 @@ const Meow = styled.button`
     background-color: lightgrey;
     cursor: not-allowed;
   }
+`;
+
+const loader = keyframes`
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+const LoaderIcon = styled(FiLoader)`
+  animation: ${loader} 1000ms infinite;
+`;
+
+const ErrorMsg = styled.span`
+  margin-right: 20px;
+  color: red;
 `;
 
 export default TweetPost;

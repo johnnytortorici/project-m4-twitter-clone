@@ -9,6 +9,9 @@ import { FiMapPin, FiCalendar } from "react-icons/fi";
 import FollowButton from "./FollowButton";
 import Tweets from "./Tweets";
 
+import Loader from "../Loader";
+import Error from "../Error";
+
 const Profile = () => {
   const { profileId } = useParams();
 
@@ -27,52 +30,59 @@ const Profile = () => {
       .then((data) => {
         setProfile(data.profile);
         setStatus("idle");
-      });
+      })
+      .catch((error) => setStatus("error"));
   }, [profileId]);
 
-  if (status === "loading") return <div>loading</div>;
-  else
-    return (
-      <>
-        <Header>
-          <Banner src={profile.bannerSrc} alt={`${profile.handle}-banner`} />
-          <Avatar src={profile.avatarSrc} alt={`${profile.displayName}`} />
-          <FollowButton isFollowing={profile.isBeingFollowedByYou} />
-        </Header>
-        <DisplayName>{profile.displayName}</DisplayName>
-        <UserInfo>
-          <Handle>
-            @{profile.handle}{" "}
-            {profile.isFollowingYou && <FollowsYou>Follows you</FollowsYou>}
-          </Handle>
-          <Bio>{profile.bio}</Bio>
-          <Info>
-            {profile.location && (
+  switch (status) {
+    case "loading":
+      return <Loader />;
+    case "error":
+      return <Error />;
+    default:
+      return (
+        <>
+          <Header>
+            <Banner src={profile.bannerSrc} alt={`${profile.handle}-banner`} />
+            <Avatar src={profile.avatarSrc} alt={`${profile.displayName}`} />
+            <FollowButton isFollowing={profile.isBeingFollowedByYou} />
+          </Header>
+          <DisplayName>{profile.displayName}</DisplayName>
+          <UserInfo>
+            <Handle>
+              @{profile.handle}{" "}
+              {profile.isFollowingYou && <FollowsYou>Follows you</FollowsYou>}
+            </Handle>
+            <Bio>{profile.bio}</Bio>
+            <Info>
+              {profile.location && (
+                <Stat>
+                  <FiMapPin /> {profile.location}
+                </Stat>
+              )}
               <Stat>
-                <FiMapPin /> {profile.location}
+                <FiCalendar /> Joined{" "}
+                {moment(profile.joined).format("MMMM YYYY")}
               </Stat>
-            )}
-            <Stat>
-              <FiCalendar /> Joined {moment(profile.joined).format("MMMM YYYY")}
-            </Stat>
-          </Info>
-          <Info>
-            <Stat>
-              <Num>{profile.numFollowing}</Num> Following
-            </Stat>
-            <Stat>
-              <Num>{profile.numFollowers}</Num> Followers
-            </Stat>
-          </Info>
-        </UserInfo>
-        <Tabs>
-          <TweetsLink to="#">Tweets</TweetsLink>
-          <TabLink to="#">Media</TabLink>
-          <TabLink to="#">Likes</TabLink>
-        </Tabs>
-        <Tweets handle={profileId} />
-      </>
-    );
+            </Info>
+            <Info>
+              <Stat>
+                <Num>{profile.numFollowing}</Num> Following
+              </Stat>
+              <Stat>
+                <Num>{profile.numFollowers}</Num> Followers
+              </Stat>
+            </Info>
+          </UserInfo>
+          <Tabs>
+            <TweetsLink to="#">Tweets</TweetsLink>
+            <TabLink to="#">Media</TabLink>
+            <TabLink to="#">Likes</TabLink>
+          </Tabs>
+          <Tweets handle={profileId} />
+        </>
+      );
+  }
 };
 
 const Header = styled.div`

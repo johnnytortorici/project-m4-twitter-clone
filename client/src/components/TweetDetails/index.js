@@ -5,6 +5,9 @@ import styled from "styled-components";
 import { FiArrowLeft } from "react-icons/fi";
 import BigTweet from "./BigTweet";
 
+import Loader from "../Loader";
+import Error from "../Error";
+
 const TweetDetails = () => {
   const { tweetId } = useParams();
 
@@ -23,22 +26,28 @@ const TweetDetails = () => {
       .then((data) => {
         setTweet(data.tweet);
         setStatus("idle");
-      });
+      })
+      .catch((error) => setStatus("error"));
   }, [tweetId]);
 
-  if (status === "loading") return <div>loading</div>;
-  else
-    return (
-      <>
-        <Heading>
-          <BackLink to="/">
-            <FiArrowLeft />
-          </BackLink>
-          Meow
-        </Heading>
-        <BigTweet tweet={tweet} />
-      </>
-    );
+  switch (status) {
+    case "loading":
+      return <Loader />;
+    case "error":
+      return <Error />;
+    default:
+      return (
+        <>
+          <Heading>
+            <BackLink to="/">
+              <FiArrowLeft />
+            </BackLink>
+            Meow
+          </Heading>
+          <BigTweet tweet={tweet} />
+        </>
+      );
+  }
 };
 
 const Heading = styled.h1`
